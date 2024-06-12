@@ -1,0 +1,42 @@
+.header {
+	background-color: rgb(86, 84, 255);
+	width: 100vw;
+	height: 3rem;
+	top: 0;
+	left: 0;
+	position: fixed;
+}
+
+.toggle_button {
+	background-color: transparent;
+}
+
+.toggle_icon {
+	color: white;
+	padding-top: 0;
+	padding-left: 0;
+	font-size: 1.5rem;
+}
+
+.header nav {
+	text-align: left;
+	vertical-align: middle;
+	display: flex;
+	gap: 1rem;
+	height: 100%;
+}
+
+.header nav li {
+	color: white;
+	list-style: none;
+	font-size: 1.1rem;
+}
+
+.header nav a {
+	color: lightgray;
+}
+
+.header nav li a:hover,
+.header nav li a:active {
+	text-decoration: underline;
+}

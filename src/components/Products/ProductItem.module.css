@@ -1,0 +1,18 @@
+.product {
+	width: 20vw;
+	padding: 0 5px;
+	border: 1px grey;
+}
+
+.product img {
+	text-align: center;
+	width: 100%;
+}
+
+.product h3 {
+	color: darkblue
+}
+
+.product p {
+	color: darkgrey;
+}

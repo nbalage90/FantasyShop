@@ -1,0 +1,7 @@
+.productlist ul {
+	list-style-type: none;
+}
+
+.productlist li {
+	display: inline-block
+}
