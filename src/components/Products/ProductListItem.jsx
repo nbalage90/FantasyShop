@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import classes from './ProductItem.module.css';
+import classes from './ProductListItem.module.css';
 
 /* eslint-disable react/prop-types */
-export default function Product({ product }) {
+export default function ProductListItem({ product }) {
   return (
     <article className={classes.product}>
-      <Link to="">
+      <Link to={`/products/${product.id}`}>
         <img
           src={`http://localhost:8000/images/${product.image}`} // TODO
           alt={product.name}

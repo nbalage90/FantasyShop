@@ -8,7 +8,7 @@ export default function Header() {
         <li>
           <NavLink
             to="/"
-            className={(isActive) => (isActive ? 'active' : undefined)}
+            className={({ isActive }) => (isActive ? 'active' : undefined)}
             end
           >
             Home
@@ -16,8 +16,8 @@ export default function Header() {
         </li>
         <li>
           <NavLink
-            to="products"
-            className={(isActive) => (isActive ? 'active' : undefined)}
+            to="/products"
+            className={({ isActive }) => (isActive ? 'active' : undefined)}
           >
             Products
           </NavLink>

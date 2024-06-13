@@ -4,7 +4,8 @@ import './App.css';
 
 import HeaderLayout from './pages/HeaderLayout';
 import HomePage from './pages/HomePage';
-import ProductPage from './pages/ProductsPage';
+import ProductsPage from './pages/ProductsPage';
+import ProductItemPage from './pages/ProductItemPage';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,17 @@ const router = createBrowserRouter([
       },
       {
         path: 'products',
-        element: <ProductPage />,
+        element: <HeaderLayout />,
+        children: [
+          {
+            index: true,
+            element: <ProductsPage />,
+          },
+          {
+            path: ':id',
+            element: <ProductItemPage />,
+          },
+        ],
       },
     ],
   },

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 
-export function useHttp(initialValue, config) {
+const BASE_URL = 'http://localhost:8000/';
+
+export function useHttp(route, initialValue, config) {
   const [data, setData] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -9,23 +11,26 @@ export function useHttp(initialValue, config) {
     async function fetchData() {
       setIsLoading(true);
 
-      let url = 'http://localhost:8000/products';
+      let url = BASE_URL + route;
       if (config && config.count) {
         url += '?count=' + config.count;
       }
+
       const response = await fetch(url);
       const resData = await response.json();
 
       if (!response.ok) {
-        setError(response.message || 'Could not fetch the data.');
+        setError(resData);
+      } else {
+        setData(resData);
       }
 
-      setData(resData);
+      // TODO: hiba esetén maximalizálni a próbálkozások számát
       setIsLoading(false);
     }
 
     fetchData();
-  }, [config]);
+  }, [config, route]);
 
   return {
     data,
