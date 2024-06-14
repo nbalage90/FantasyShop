@@ -40,3 +40,8 @@
 .header nav li a:active {
 	text-decoration: underline;
 }
+
+.loadingbar {
+	width: 100vw;
+	height: 1rem;
+}

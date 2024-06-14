@@ -16,13 +16,21 @@ export function useHttp(route, initialValue, config) {
         url += '?count=' + config.count;
       }
 
-      const response = await fetch(url);
-      const resData = await response.json();
+      try {
+        const response = await fetch(url);
+        const resData = await response.json();
 
-      if (!response.ok) {
-        setError(resData);
-      } else {
-        setData(resData);
+        if (!response.ok) {
+          setError(resData);
+        } else {
+          setData(resData);
+        }
+      } catch (error) {
+        setError({
+          title: 'Failed to load data',
+          message: error.message,
+          path: null,
+        });
       }
 
       // TODO: hiba esetén maximalizálni a próbálkozások számát

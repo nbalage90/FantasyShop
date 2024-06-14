@@ -1,0 +1,19 @@
+.none {
+	height: 0;
+	display: none;
+}
+
+.success {
+	display: block;
+	background-color: lightgreen;
+}
+
+.pending {
+	display: block;
+	background-color: yellow;
+}
+
+.error {
+	display: block;
+	background-color: lightcoral;
+}

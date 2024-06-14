@@ -16,3 +16,11 @@
 .product p {
 	color: darkgrey;
 }
+
+.button {
+	background-color: lightgrey;
+}
+
+.button:hover {
+	border-color: grey;
+}

@@ -13,6 +13,9 @@ export default function ProductListItem({ product }) {
         <h3>{product.name}</h3>
         <p>{product.description}</p>
       </Link>
+      <div>
+        <button className={classes.button}>Add to Cart</button>
+      </div>
     </article>
   );
 }
