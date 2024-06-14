@@ -8,9 +8,6 @@ const loadingStatusSlice = createSlice({
   reducers: {
     setLoadingStatus(state, action) {
       state.status = action.payload;
-      // setTimeout(() => {
-      //   state.status = 'none';
-      // }, 3000);
     },
   },
 });

@@ -6,12 +6,30 @@ import { useEffect, useState } from 'react';
 
 import './Header.css';
 
+const PENDING_NOTIFICATION_TIME = 10000;
+const ERROR_NOTIFICATION_TIME = 5000;
+const SUCCESS_NOTIFICATION_TIME = 1000;
+
 export default function Header() {
   const [loadingStatus, setLoadingStatus] = useState('none');
   const status = useSelector((state) => state.loadingStatus.status);
 
   useEffect(() => {
     setLoadingStatus(status);
+
+    let timeout;
+
+    if (status === 'success') {
+      timeout = SUCCESS_NOTIFICATION_TIME;
+    } else if (status === 'pending') {
+      timeout = PENDING_NOTIFICATION_TIME;
+    } else {
+      timeout = ERROR_NOTIFICATION_TIME;
+    }
+
+    setTimeout(() => {
+      setLoadingStatus('none');
+    }, timeout);
   }, [status]);
 
   return (
