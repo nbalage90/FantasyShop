@@ -1,8 +1,8 @@
 ﻿namespace Catalop.API.Models;
 
-public class Product
+public class ProductDto
 {
-    public Product()
+    public ProductDto()
     {
 
     }

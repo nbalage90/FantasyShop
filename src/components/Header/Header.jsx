@@ -15,21 +15,23 @@ export default function Header() {
   const status = useSelector((state) => state.loadingStatus.status);
 
   useEffect(() => {
-    setLoadingStatus(status);
+    if (status && status !== 'none') {
+      setLoadingStatus(status);
 
-    let timeout;
+      let timeout;
 
-    if (status === 'success') {
-      timeout = SUCCESS_NOTIFICATION_TIME;
-    } else if (status === 'pending') {
-      timeout = PENDING_NOTIFICATION_TIME;
-    } else {
-      timeout = ERROR_NOTIFICATION_TIME;
+      if (status === 'success') {
+        timeout = SUCCESS_NOTIFICATION_TIME;
+      } else if (status === 'pending') {
+        timeout = PENDING_NOTIFICATION_TIME;
+      } else {
+        timeout = ERROR_NOTIFICATION_TIME;
+      }
+
+      setTimeout(() => {
+        setLoadingStatus('none');
+      }, timeout);
     }
-
-    setTimeout(() => {
-      setLoadingStatus('none');
-    }, timeout);
   }, [status]);
 
   return (

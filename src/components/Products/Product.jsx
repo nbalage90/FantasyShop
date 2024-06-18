@@ -25,7 +25,7 @@ export default function Product({ productId }) {
     );
   }
 
-  if (!isLoading && !error) {
+  if (Object.keys(product).length > 0) {
     content = (
       <article>
         <section>

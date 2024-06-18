@@ -6,6 +6,8 @@ import ErrorBlock from '../../UI/ErrorBlock';
 import classes from './ProductList.module.css';
 
 import { loadingStatusActions } from '../../store/loadingStatus';
+import { useEffect, useState } from 'react';
+
 let URL_CONFIG = {
   count: null,
 };
@@ -13,6 +15,7 @@ let URL_CONFIG = {
 /* eslint-disable react/prop-types */
 export default function ProductList({ count }) {
   const dispatch = useDispatch();
+  const [loadingStatus, setLoadingStatus] = useState('none');
 
   URL_CONFIG.count = count;
   const {
@@ -21,19 +24,25 @@ export default function ProductList({ count }) {
     error,
   } = useHttp('products', [], URL_CONFIG); // TODO: tansack query
 
-  function handleLoadingStatusChange(newStatus) {
-    dispatch(loadingStatusActions.setLoadingStatus(newStatus));
-  }
+  useEffect(() => {
+    if (isLoading) {
+      setLoadingStatus('pending');
+    } else if (error) {
+      setLoadingStatus('error');
+    } else if (!isLoading && !error) {
+      setLoadingStatus('success');
+    }
+
+    dispatch(loadingStatusActions.setLoadingStatus(loadingStatus));
+  }, [loadingStatus, dispatch, error, isLoading]);
 
   let content;
 
   if (isLoading) {
-    handleLoadingStatusChange('pending');
     content = <p>Loading data...</p>;
   }
 
   if (error) {
-    handleLoadingStatusChange('error');
     content = (
       <ErrorBlock
         title={error.title}
@@ -42,8 +51,7 @@ export default function ProductList({ count }) {
     );
   }
 
-  if (!isLoading && !error && products.length > 0) {
-    handleLoadingStatusChange('success');
+  if (!isLoading && !error) {
     content = (
       <ul>
         {products.map((product) => (

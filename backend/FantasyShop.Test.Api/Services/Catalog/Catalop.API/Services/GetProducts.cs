@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalop.API.Services;
 
-public class GetProducts(IRepository<Product> repository) : ICarterModule
+public class GetProducts(IRepository<ProductDto> repository) : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
