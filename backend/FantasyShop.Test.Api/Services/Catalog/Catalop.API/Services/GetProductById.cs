@@ -2,15 +2,14 @@
 using Carter;
 using Catalop.API.Models;
 using Catalop.API.Repositories;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Catalop.API.Services;
 
-public class GetProductById(IRepository<ProductDto> repository) : ICarterModule
+public class GetProductById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/products/{id}", async (Guid id) =>
+        app.MapGet("/products/{id}", async (IRepository<ProductDto> repository, Guid id) =>
         {
             var product = await repository.GetByIdAsync(id);
 

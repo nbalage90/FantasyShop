@@ -1,6 +1,7 @@
 ﻿using Catalog.Data;
 using Catalop.API.Models;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalop.API.Repositories;
 
@@ -14,11 +15,11 @@ public class ProductRepository(ProductDbContext context) : IRepository<ProductDt
         if (count != null)
             prodList = prodList.Take(count.Value);
 
-        return prodList.ToList().Adapt<IEnumerable<ProductDto>>();
+        return (await prodList.ToListAsync()).Adapt<IEnumerable<ProductDto>>();
     }
 
     public async Task<ProductDto> GetByIdAsync(Guid id)
     {
-        return context.Products.AsQueryable().FirstOrDefault(product => product.Id == id).Adapt<ProductDto>();
+        return (await context.Products.AsQueryable().FirstOrDefaultAsync(product => product.Id == id)).Adapt<ProductDto>();
     }
 }
