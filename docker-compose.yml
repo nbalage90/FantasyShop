@@ -1,5 +1,6 @@
 services:
   catalogapi:
+    container_name: catalogapi
     build:
       context: ./backend/FantasyShop.Test.Api
       dockerfile: ./Services/Catalog/Catalog.API/Dockerfile
@@ -8,8 +9,9 @@ services:
     # volumes:
     #   - .\backend\FantasyShop.Test.Api:/app
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 3000:8000
