@@ -1,5 +1,6 @@
 .product {
 	width: 20vw;
+	max-width: 20rem;
 	padding: 0 5px;
 	border: 1px grey;
 }

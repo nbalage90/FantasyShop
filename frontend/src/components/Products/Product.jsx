@@ -39,7 +39,7 @@ export default function Product({ productId }) {
       <article>
         <section className={classes.uppersection}>
           <img
-            src={`http://localhost:8000/images/${product.image}`}
+            src={`http://localhost:6010/images/${product.image}`}
             alt={product.name}
           />
           <h3>{product.name}</h3>

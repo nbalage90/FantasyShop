@@ -7,7 +7,7 @@ export default function ProductListItem({ product }) {
     <article className={classes.product}>
       <Link to={`/products/${product.id}`}>
         <img
-          src={`http://localhost:8000/images/${product.image}`} // TODO
+          src={`http://localhost:6010/images/${product.image}`} // TODO
           alt={product.name}
         />
         <h3>{product.name}</h3>
