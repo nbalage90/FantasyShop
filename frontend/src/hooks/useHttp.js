@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const BASE_URL = 'http://localhost:8000/';
+const BASE_URL = 'http://localhost:8800/';
 
 export function useHttp(route, initialValue, config) {
   const [data, setData] = useState(initialValue);

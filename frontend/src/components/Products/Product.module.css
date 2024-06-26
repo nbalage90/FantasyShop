@@ -1,0 +1,9 @@
+.uppersection {
+	display: inline-block;
+	width: 45vw;
+	border: 1px darkslategrey;
+	background-color: rgb(241, 250, 253);
+	margin: 0 10px;
+	height: 25rem;
+	top: 0;
+}

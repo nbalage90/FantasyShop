@@ -7,12 +7,13 @@ import { useEffect, useState } from 'react';
 import './Header.css';
 
 const PENDING_NOTIFICATION_TIME = 10000;
-const ERROR_NOTIFICATION_TIME = 5000;
+const ERROR_NOTIFICATION_TIME = 3000;
 const SUCCESS_NOTIFICATION_TIME = 1000;
 
 export default function Header() {
   const [loadingStatus, setLoadingStatus] = useState('none');
   const status = useSelector((state) => state.loadingStatus.status);
+  const cartQuantity = useSelector((state) => state.cart.totalQuantity);
 
   useEffect(() => {
     if (status && status !== 'none') {
@@ -56,7 +57,7 @@ export default function Header() {
           </NavLink>
         </li>
         <li>
-          <NavLink>Cart(0)</NavLink>
+          <NavLink>Cart({cartQuantity})</NavLink>
         </li>
       </nav>
     </header>

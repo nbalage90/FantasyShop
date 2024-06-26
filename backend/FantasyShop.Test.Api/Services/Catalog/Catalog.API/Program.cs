@@ -1,5 +1,6 @@
 using Carter;
 using Catalog.Data;
+using Catalog.Data.Seed;
 using Catalop.API.Models;
 using Catalop.API.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ builder.Services.AddCors();
 
 builder.Services.AddDbContext<ProductDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerContainer"));
 }, ServiceLifetime.Singleton);
 builder.Services.AddSingleton<IRepository<ProductDto>, ProductRepository>();
 builder.Services.AddCarter();
@@ -30,6 +31,11 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/product")),
     RequestPath = "/Images"
 });
+
+if (app.Environment.IsDevelopment())
+{
+    await DataSeeder.InitializeDatabaseAsync(app);
+}
 
 app.MapCarter();
 
