@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './Header.module.css';
-import { useEffect, useState } from 'react';
+
+import { uiActions } from '../../store/ui';
 
 import './Header.css';
 
@@ -14,6 +16,7 @@ export default function Header() {
   const [loadingStatus, setLoadingStatus] = useState('none');
   const status = useSelector((state) => state.loadingStatus.status);
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (status && status !== 'none') {
@@ -34,6 +37,10 @@ export default function Header() {
       }, timeout);
     }
   }, [status]);
+
+  function handleCartButtonClick() {
+    dispatch(uiActions.openCart());
+  }
 
   return (
     <header className={classes.header}>
@@ -57,7 +64,9 @@ export default function Header() {
           </NavLink>
         </li>
         <li>
-          <NavLink>Cart({cartQuantity})</NavLink>
+          <NavLink onClick={handleCartButtonClick}>
+            Cart({cartQuantity})
+          </NavLink>
         </li>
       </nav>
     </header>

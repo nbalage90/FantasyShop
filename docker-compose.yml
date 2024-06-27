@@ -7,7 +7,7 @@ services:
     ports:
       - 6010:8080
     # volumes:
-    #   - .\backend\FantasyShop.Test.Api:/app
+    #   - ./backend/FantasyShop.Test.Api:/app
   frontend:
     container_name: frontend
     build:
