@@ -12,17 +12,21 @@ let URL_CONFIG = {
   count: null,
 };
 
+const initialData = {
+  products: [],
+};
+
 /* eslint-disable react/prop-types */
 export default function ProductList({ count }) {
   const dispatch = useDispatch();
   const [loadingStatus, setLoadingStatus] = useState('none');
 
   URL_CONFIG.count = count;
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useHttp('products', [], URL_CONFIG); // TODO: tansack query
+  const { data, isLoading, error } = useHttp(
+    'products',
+    initialData,
+    URL_CONFIG
+  ); // TODO: tansack query && paging
 
   useEffect(() => {
     if (isLoading) {
@@ -54,7 +58,7 @@ export default function ProductList({ count }) {
   if (!isLoading && !error) {
     content = (
       <ul>
-        {products.map((product) => (
+        {data.products.map((product) => (
           <li key={product.id}>
             <ProductListItem product={product} />
           </li>

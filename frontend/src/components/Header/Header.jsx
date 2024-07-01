@@ -64,7 +64,7 @@ export default function Header() {
           </NavLink>
         </li>
         <li>
-          <NavLink onClick={handleCartButtonClick}>
+          <NavLink onClick={handleCartButtonClick} className={classes.cart}>
             Cart({cartQuantity})
           </NavLink>
         </li>

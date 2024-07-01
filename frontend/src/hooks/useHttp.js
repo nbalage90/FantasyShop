@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const BASE_URL = 'http://localhost:6010/';
+const BASE_URL = 'http://localhost:6010/'; // TODO: paging
 
 export function useHttp(route, initialValue, config) {
   const [data, setData] = useState(initialValue);
@@ -13,7 +13,7 @@ export function useHttp(route, initialValue, config) {
 
       let url = BASE_URL + route;
       if (config && config.count) {
-        url += '?count=' + config.count;
+        url += '?pageSize=' + config.count;
       }
 
       try {
