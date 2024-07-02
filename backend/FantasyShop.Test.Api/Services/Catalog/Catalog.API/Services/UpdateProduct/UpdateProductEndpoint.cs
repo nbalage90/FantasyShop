@@ -1,4 +1,5 @@
 ﻿using Carter;
+using Catalog.API.Services.GetProducts;
 using Mapster;
 using MediatR;
 
@@ -20,6 +21,11 @@ public class UpdateProductEndpoint : ICarterModule
             var response = result.Adapt<UpdateProductResponse>();
 
             return Results.Ok(response);
-        });
+        })
+        .WithName("UpdateProduct")
+        .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Updates a Product")
+        .WithDescription("Updates a Product");
     }
 }

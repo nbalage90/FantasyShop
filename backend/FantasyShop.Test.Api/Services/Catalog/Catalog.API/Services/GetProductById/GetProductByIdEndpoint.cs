@@ -1,4 +1,5 @@
 ﻿using Carter;
+using Catalog.API.Services.GetProducts;
 using Catalop.API.Models;
 using Mapster;
 using MediatR;
@@ -21,6 +22,11 @@ public class GetProductByIdEndpoint : ICarterModule
             var response = result.Adapt<GetProductByIdResponse>();
 
             return Results.Ok(response);
-        });
+        })
+        .WithName("GetProductById")
+        .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Returns a list of products")
+        .WithSummary("Returns a list of paged products");
     }
 }

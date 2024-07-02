@@ -21,7 +21,7 @@ public class CreateProductEndpoint : ICarterModule
 
             return Results.Ok(response);
         })
-        .WithName("Add Product")
+        .WithName("Create Product")
         .Produces<CreateProductResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Creates a new Product")

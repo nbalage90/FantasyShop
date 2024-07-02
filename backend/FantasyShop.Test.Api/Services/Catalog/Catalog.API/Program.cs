@@ -1,8 +1,7 @@
+using BuildingBlocks.Exceptions.Handler;
 using Carter;
 using Catalog.Data;
 using Catalog.Data.Seed;
-using Catalop.API.Models;
-using Catalop.API.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
@@ -10,12 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors();
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 var assembly = typeof(Program).Assembly;
 builder.Services.AddDbContext<ProductDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerContainer"));
 }, ServiceLifetime.Singleton);
-builder.Services.AddSingleton<IRepository<ProductDto>, ProductRepository>();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
@@ -23,6 +23,8 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddCarter();
 
 var app = builder.Build();
+
+app.UseExceptionHandler(_ => { });
 
 app.UseCors(options =>
 {

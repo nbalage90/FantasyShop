@@ -1,4 +1,5 @@
 ﻿using Carter;
+using Catalog.API.Services.GetProducts;
 using Mapster;
 using MediatR;
 
@@ -20,6 +21,11 @@ public class DeleteProductEndpoint : ICarterModule
             var response = result.Adapt<DeleteProductResponse>();
 
             return Results.Ok(response);
-        });
+        })
+        .WithName("DeleteProduct")
+        .Produces<GetProductsResponse>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Deletes a Product")
+        .WithSummary("Deletes a Product by it's ID");
     }
 }

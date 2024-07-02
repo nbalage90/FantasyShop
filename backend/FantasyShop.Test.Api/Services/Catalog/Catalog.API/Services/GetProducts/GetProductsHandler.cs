@@ -1,19 +1,24 @@
-﻿using Catalog.Domain;
+﻿using Catalog.Data;
 using Catalop.API.Models;
-using Catalop.API.Repositories;
 using Mapster;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.API.Services.GetProducts;
 
 public record GetProductsQuery(int? PageNumber = 1, int? PageSize = 10) : IRequest<GetProductsResult>;
 public record GetProductsResult(IEnumerable<ProductDto> Products);
 
-public class GetProductsHandler(IRepository<ProductDto> repository) : IRequestHandler<GetProductsQuery, GetProductsResult>
+public class GetProductsHandler(ProductDbContext context) : IRequestHandler<GetProductsQuery, GetProductsResult>
 {
     public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
     {
-        var products = await repository.GetAsync(query.PageSize, query.PageNumber, cancellationToken);
+        var prodList = context.Products.AsQueryable();
+        if (query.PageSize != null)
+            prodList = prodList.Skip((query.PageNumber.Value - 1) * query.PageSize.Value)
+                .Take(query.PageSize.Value);
+
+        var products = (await prodList.ToListAsync(cancellationToken)).Adapt<IEnumerable<ProductDto>>();
 
         return new GetProductsResult(products);
     }
