@@ -1,9 +1,4 @@
-﻿using Carter;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.Services.GetProducts;
+﻿namespace Catalog.API.Services.GetProducts;
 
 public record GetProductsRequest(int? PageSize = 10, int? PageNumber = 1);
 public record GetProductsResponse(IEnumerable<ProductDto> Products);

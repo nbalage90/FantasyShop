@@ -1,9 +1,4 @@
-﻿using Carter;
-using Catalog.API.Services.GetProducts;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.Services.UpdateProduct;
+﻿namespace Catalog.API.Services.UpdateProduct;
 
 public record UpdateProductRequest(Guid Id, string Name, List<string> Category, string Description, string Image, decimal Price);
 public record UpdateProductResponse(bool IsSuccess);
@@ -14,7 +9,7 @@ public class UpdateProductEndpoint : ICarterModule
     {
         app.MapPut("/products", async (UpdateProductRequest request, ISender sender) =>
         {
-            var query = request.Adapt<UpdateProductQuery>();
+            var query = request.Adapt<UpdateProductCommand>();
 
             var result = await sender.Send(query);
 

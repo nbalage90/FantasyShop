@@ -1,10 +1,4 @@
-﻿using Carter;
-using Catalog.API.Services.GetProducts;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.Services.GetProductById;
+﻿namespace Catalog.API.Services.GetProductById;
 
 public record GetProductByIdRequest(Guid Id);
 public record GetProductByIdResponse(ProductDto Product);

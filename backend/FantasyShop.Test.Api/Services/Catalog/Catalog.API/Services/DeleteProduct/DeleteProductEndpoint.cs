@@ -1,9 +1,4 @@
-﻿using Carter;
-using Catalog.API.Services.GetProducts;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.Services.DeleteProduct;
+﻿namespace Catalog.API.Services.DeleteProduct;
 
 public record DeleteProductRequest(Guid Id);
 public record DeleteProductResponse(bool IsSuccess);
@@ -14,7 +9,7 @@ public class DeleteProductEndpoint : ICarterModule
     {
         app.MapDelete("/products/{id}", async ([AsParameters] DeleteProductRequest request, ISender sender) =>
         {
-            var query = request.Adapt<DeleteProductQuery>();
+            var query = request.Adapt<DeleteProductCommand>();
 
             var result = await sender.Send(query);
 

@@ -1,0 +1,10 @@
+﻿global using BuildingBlocks.CQRS;
+global using Catalog.API.Exceptions;
+global using Catalog.Data;
+global using Microsoft.EntityFrameworkCore;
+global using Catalop.API.Models;
+global using Mapster;
+global using Carter;
+global using Catalog.API.Services.GetProducts;
+global using MediatR;
+global using FluentValidation;

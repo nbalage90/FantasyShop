@@ -1,29 +1,24 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.Data;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Catalog.API.Services.UpdateProduct;
 
-namespace Catalog.API.Services.UpdateProduct;
-
-public record UpdateProductQuery(Guid Id, string Name, List<string> Category, string Description, string Image, decimal Price) : IRequest<UpdateProductResult>;
+public record UpdateProductCommand(Guid Id, string Name, List<string> Category, string Description, string Image, decimal Price) : ICommand<UpdateProductResult>;
 public record UpdateProductResult(bool IsSuccess);
 
-public class UpdateProductHandler(ProductDbContext context) : IRequestHandler<UpdateProductQuery, UpdateProductResult>
+public class UpdateProductHandler(ProductDbContext context) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
-    public async Task<UpdateProductResult> Handle(UpdateProductQuery query, CancellationToken cancellationToken)
+    public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
         bool isSuccess = true;
 
-        var product = await context.Products.SingleOrDefaultAsync(product => product.Id == query.Id, cancellationToken);
+        var product = await context.Products.SingleOrDefaultAsync(product => product.Id == command.Id, cancellationToken);
 
         if (product == null)
-            throw new ProductNotFoundException(query.Id);
+            throw new ProductNotFoundException(command.Id);
 
-        product.Name = query.Name;
-        product.Category = query.Category;
-        product.Description = query.Description;
-        product.Image = query.Image;
-        product.Price = query.Price;
+        product.Name = command.Name;
+        product.Category = command.Category;
+        product.Description = command.Description;
+        product.Image = command.Image;
+        product.Price = command.Price;
 
         try
         {

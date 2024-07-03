@@ -1,15 +1,9 @@
-﻿using Catalog.Data;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Catalog.API.Services.GetProductsByCategory;
 
-namespace Catalog.API.Services.GetProductsByCategory;
-
-public record GetProductsByCategoryQuery(string Category) : IRequest<GetProductsByCategoryResult>;
+public record GetProductsByCategoryQuery(string Category) : IQuery<GetProductsByCategoryResult>;
 public record GetProductsByCategoryResult(IEnumerable<ProductDto> Products);
 
-public class GetProductsByCategoryHandler(ProductDbContext context) : IRequestHandler<GetProductsByCategoryQuery, GetProductsByCategoryResult>
+public class GetProductsByCategoryHandler(ProductDbContext context) : IQueryHandler<GetProductsByCategoryQuery, GetProductsByCategoryResult>
 {
     public async Task<GetProductsByCategoryResult> Handle(GetProductsByCategoryQuery query, CancellationToken cancellationToken)
     {

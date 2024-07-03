@@ -1,15 +1,9 @@
-﻿using Catalog.Data;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Catalog.API.Services.GetProducts;
 
-namespace Catalog.API.Services.GetProducts;
-
-public record GetProductsQuery(int? PageNumber = 1, int? PageSize = 10) : IRequest<GetProductsResult>;
+public record GetProductsQuery(int? PageNumber = 1, int? PageSize = 10) : IQuery<GetProductsResult>;
 public record GetProductsResult(IEnumerable<ProductDto> Products);
 
-public class GetProductsHandler(ProductDbContext context) : IRequestHandler<GetProductsQuery, GetProductsResult>
+public class GetProductsHandler(ProductDbContext context) : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
     public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
     {

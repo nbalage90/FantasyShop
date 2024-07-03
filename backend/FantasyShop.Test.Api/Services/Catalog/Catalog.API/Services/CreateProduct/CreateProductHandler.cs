@@ -1,25 +1,32 @@
-﻿using Catalog.Data;
-using Catalog.Domain;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
+﻿using Catalog.Domain;
 
 namespace Catalog.API.Services.CreateProduct;
 
-public record CreateProductQuery(string Name, List<string> Category, string Description, string Image, decimal Price) : IRequest<CreateProductResult>;
+public record CreateProductCommand(string Name, List<string> Category, string Description, string Image, decimal Price) : ICommand<CreateProductResult>;
 public record CreateProductResult(Guid Id);
 
-public class CreateProductHandler(ProductDbContext context) : IRequestHandler<CreateProductQuery, CreateProductResult>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
-    public async Task<CreateProductResult> Handle(CreateProductQuery query, CancellationToken cancellationToken)
+    public CreateProductCommandValidator()
+    {
+        RuleFor(product => product.Name).NotEmpty();
+        RuleFor(product => product.Category).NotEmpty();
+        RuleFor(product => product.Image).NotEmpty();
+        RuleFor(product => product.Price).GreaterThan(0).WithMessage("Price should be greater than 0.");
+    }
+}
+
+public class CreateProductHandler(ProductDbContext context) : ICommandHandler<CreateProductCommand, CreateProductResult>
+{
+    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         var newProductDto = new ProductDto
         {
-            Name = query.Name,
-            Category = query.Category,
-            Description = query.Description,
-            Image = query.Image,
-            Price = query.Price,
+            Name = command.Name,
+            Category = command.Category,
+            Description = command.Description,
+            Image = command.Image,
+            Price = command.Price,
         };
 
         var newProduct = newProductDto.Adapt<Product>();
@@ -27,6 +34,6 @@ public class CreateProductHandler(ProductDbContext context) : IRequestHandler<Cr
         await context.Products.AddAsync(newProduct, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
 
-        return new CreateProductResult(newProductDto.Id);
+        return new CreateProductResult(newProduct.Id);
     }
 }

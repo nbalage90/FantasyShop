@@ -1,16 +1,9 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.Data;
-using Catalop.API.Models;
-using Mapster;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Catalog.API.Services.GetProductById;
 
-namespace Catalog.API.Services.GetProductById;
-
-public record GetProductByIdQuery(Guid Id) : IRequest<GetProductByIdResult>;
+public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
 public record GetProductByIdResult(ProductDto Product);
 
-public class GetProductByIdHandler(ProductDbContext context) : IRequestHandler<GetProductByIdQuery, GetProductByIdResult>
+public class GetProductByIdHandler(ProductDbContext context) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
     public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
     {

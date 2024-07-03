@@ -1,8 +1,4 @@
-﻿using Carter;
-using Mapster;
-using MediatR;
-
-namespace Catalog.API.Services.CreateProduct;
+﻿namespace Catalog.API.Services.CreateProduct;
 
 public record CreateProductRequest(string Name, List<string> Category, string Description, string Image, decimal Price);
 public record CreateProductResponse(Guid Id);
@@ -13,7 +9,7 @@ public class CreateProductEndpoint : ICarterModule
     {
         app.MapPost("/products", async (CreateProductRequest request, ISender sender) =>
         {
-            var query = request.Adapt<CreateProductQuery>();
+            var query = request.Adapt<CreateProductCommand>();
 
             var result = await sender.Send(query);
 

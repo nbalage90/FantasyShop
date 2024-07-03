@@ -1,21 +1,24 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.Data;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿namespace Catalog.API.Services.DeleteProduct;
 
-namespace Catalog.API.Services.DeleteProduct;
-
-public record DeleteProductQuery(Guid Id) : IRequest<DeleteProductResult>;
+public record DeleteProductCommand(Guid Id) : ICommand<DeleteProductResult>;
 public record DeleteProductResult(bool IsSuccess);
 
-public class DeleteProductHandler(ProductDbContext context) : IRequestHandler<DeleteProductQuery, DeleteProductResult>
+public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
 {
-    public async Task<DeleteProductResult> Handle(DeleteProductQuery query, CancellationToken cancellationToken)
+    public DeleteProductCommandValidator()
     {
-        var product = await context.Products.SingleOrDefaultAsync(product => product.Id == query.Id, cancellationToken);
+        RuleFor(product => product.Id).NotEmpty();
+    }
+}
+
+public class DeleteProductHandler(ProductDbContext context) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
+{
+    public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
+    {
+        var product = await context.Products.SingleOrDefaultAsync(product => product.Id == command.Id, cancellationToken);
 
         if (product == null)
-            throw new ProductNotFoundException(query.Id);
+            throw new ProductNotFoundException(command.Id);
 
         bool isSuccess;
 
