@@ -4,8 +4,8 @@ using MediatR;
 
 namespace BuildingBlocks.Behaviors;
 
-public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TResponse>> validators) : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class, ICommand<TResponse>
+public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators) : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : ICommand<TResponse>
 {
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
@@ -18,7 +18,7 @@ public sealed class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidat
             .Select(v => v.Validate(validationContext))
             .SelectMany(v => v.Errors);
 
-        if (errorsDictionary != null)
+        if (errorsDictionary.Any())
             throw new ValidationException(errorsDictionary);
 
         return await next();

@@ -11,7 +11,6 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
     {
         RuleFor(product => product.Name).NotEmpty();
         RuleFor(product => product.Category).NotEmpty();
-        RuleFor(product => product.Image).NotEmpty();
         RuleFor(product => product.Price).GreaterThan(0).WithMessage("Price should be greater than 0.");
     }
 }
