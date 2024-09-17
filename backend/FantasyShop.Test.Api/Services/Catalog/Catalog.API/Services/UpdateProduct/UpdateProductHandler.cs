@@ -1,6 +1,6 @@
 ﻿namespace Catalog.API.Services.UpdateProduct;
 
-public record UpdateProductCommand(Guid Id, string Name, List<string> Category, string Description, string Image, decimal Price) : ICommand<UpdateProductResult>;
+public record UpdateProductCommand(Guid Id, string Name, List<Guid> CategoryIds, string Description, string Image, decimal Price) : ICommand<UpdateProductResult>;
 public record UpdateProductResult(bool IsSuccess);
 
 public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
@@ -9,12 +9,12 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     {
         RuleFor(p => p.Id).NotEmpty();
         RuleFor(p => p.Name).NotEmpty();
-        RuleFor(p => p.Category).NotEmpty();
+        RuleFor(p => p.CategoryIds).NotEmpty();
         RuleFor(p => p.Price).GreaterThan(0).WithMessage("Price should be greater than 0.");
     }
 }
 
-public class UpdateProductHandler(ProductDbContext context) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
+public class UpdateProductHandler(CatalogDbContext context) : ICommandHandler<UpdateProductCommand, UpdateProductResult>
 {
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
@@ -26,7 +26,7 @@ public class UpdateProductHandler(ProductDbContext context) : ICommandHandler<Up
             throw new ProductNotFoundException(command.Id);
 
         product.Name = command.Name;
-        product.Category = command.Category;
+        product.CategoryIds = command.CategoryIds;
         product.Description = command.Description;
         product.Image = command.Image;
         product.Price = command.Price;

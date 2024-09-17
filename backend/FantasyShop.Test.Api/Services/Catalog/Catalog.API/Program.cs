@@ -16,7 +16,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddValidatorsFromAssembly(assembly);
 
-builder.Services.AddDbContext<ProductDbContext>(options =>
+builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerContainer"));
 }, ServiceLifetime.Singleton);

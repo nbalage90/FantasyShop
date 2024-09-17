@@ -3,7 +3,7 @@
 public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
 public record GetProductByIdResult(ProductDto Product);
 
-public class GetProductByIdHandler(ProductDbContext context) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
+public class GetProductByIdHandler(CatalogDbContext context) : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
     public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
     {

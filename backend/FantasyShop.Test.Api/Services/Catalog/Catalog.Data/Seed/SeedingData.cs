@@ -1,19 +1,59 @@
 ﻿using Catalog.Domain;
+using System.Runtime.CompilerServices;
 
 namespace Catalog.Data.Seed;
 internal static class SeedingData
 {
     private static readonly List<Product> seedingProducts;
+    private static readonly List<Category> seedingCategories;
+    private static readonly List<CategoryProduct> seedingCategoryProducts;
 
     public static List<Product> SeedingProducts
     {
         get { return seedingProducts; }
     }
 
+    public static List<Category> SeedingCategories
+    {
+        get { return seedingCategories; }
+    }
+
+    public static List<CategoryProduct> SeedingCategoryProducts
+    {
+        get
+        {
+            return seedingCategoryProducts;
+        }
+    }
+
     static SeedingData()
     {
-        seedingProducts = new List<Product>
-        {
+        seedingCategories = [
+            new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Smart Phone"
+            },
+            new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "White Appliances"
+            },
+            new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Home Kitchen"
+            },
+
+            new Category
+            {
+                Id = Guid.NewGuid(),
+                Name = "Camera"
+            },
+        ];
+
+        seedingProducts =
+        [
             new Product()
             {
                 Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
@@ -21,7 +61,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-1.png",
                 Price = 950.00M,
-                Category = new List<string> { "Smart Phone" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "Smart Phone").Id
+                ]
             },
             new Product()
             {
@@ -30,7 +73,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-2.png",
                 Price = 840.00M,
-                Category = new List<string> { "Smart Phone" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "Smart Phone").Id
+                ]
             },
             new Product()
             {
@@ -39,7 +85,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-3.png",
                 Price = 650.00M,
-                Category = new List<string> { "White Appliances" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "White Appliances").Id
+                ]
             },
             new Product()
             {
@@ -48,7 +97,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-4.png",
                 Price = 470.00M,
-                Category = new List<string> { "White Appliances" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "White Appliances").Id
+                ]
             },
             new Product()
             {
@@ -57,7 +109,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-5.png",
                 Price = 380.00M,
-                Category = new List<string> { "Smart Phone" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "Smart Phone").Id
+                ]
             },
             new Product()
             {
@@ -66,7 +121,10 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-6.png",
                 Price = 240.00M,
-                Category = new List<string> { "Home Kitchen" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "Home Kitchen").Id
+                ]
             },
             new Product()
             {
@@ -75,8 +133,28 @@ internal static class SeedingData
                 Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                 Image = "product-6.png",
                 Price = 240.00M,
-                Category = new List<string> { "Camera" }
+                CategoryIds =
+                [
+                    seedingCategories.Single(c => c.Name == "Camera").Id
+                ]
             }
-        };
+        ];
+
+        for (int i = 0; i < seedingCategories.Count; i++)
+        {
+            var category = seedingCategories[i];
+            category.ProductIds = seedingProducts.Where(p => p.CategoryIds.Contains(category.Id)).Select(p => p.Id).ToList();
+
+            seedingCategoryProducts ??= [];
+
+            foreach (var productId in category.ProductIds)
+            {
+                seedingCategoryProducts.Add(new CategoryProduct
+                {
+                    CategoryId = category.Id,
+                    ProductId = productId
+            });
+            }
+        }
     }
 }

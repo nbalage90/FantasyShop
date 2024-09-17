@@ -3,9 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Catalog.Data;
-public class ProductDbContext(DbContextOptions options) : DbContext(options)
+public class CatalogDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    //public DbSet<CategoryProduct> CategoryProducts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
