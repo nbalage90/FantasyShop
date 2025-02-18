@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import classes from './ProductListItem.module.css';
+import Button from '../../UI/Button';
 
 import { cartActions } from '../../store/cart';
 
@@ -24,12 +25,11 @@ export default function ProductListItem({ product }) {
         <p>{product.description}</p>
       </Link>
       <div>
-        <button
+        <Button
+          title="Add to Cart"
           className={classes.button}
           onClick={handleAddToCartButtonClick}
-        >
-          Add to Cart
-        </button>
+        />
       </div>
     </article>
   );

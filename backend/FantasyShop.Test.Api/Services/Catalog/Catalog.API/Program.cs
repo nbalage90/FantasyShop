@@ -1,6 +1,5 @@
 using BuildingBlocks.Behaviors;
 using BuildingBlocks.Exceptions.Handler;
-using Catalog.Data.Seed;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,11 +40,6 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/product")),
     RequestPath = "/Images"
 });
-
-if (app.Environment.IsDevelopment())
-{
-    await DataSeeder.InitializeDatabaseAsync(app);
-}
 
 app.MapCarter();
 

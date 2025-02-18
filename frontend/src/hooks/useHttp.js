@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const BASE_URL = 'http://localhost:6010/'; // TODO: paging
+const BASE_URL = 'http://localhost:6020/'; // TODO: paging
 
 export function useHttp(route, initialValue, config) {
   const [data, setData] = useState(initialValue);
@@ -40,9 +40,45 @@ export function useHttp(route, initialValue, config) {
     fetchData();
   }, [config, route]);
 
+  const sendRequest = useCallback(
+    async function sendRequest(postRoute, data) {
+      setIsLoading(true);
+
+      let url = BASE_URL + postRoute;
+
+      try {
+        var response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: data,
+        });
+        var resData = response.json();
+
+        if (!response.ok) {
+          setError(resData);
+        } else {
+          setData(resData);
+        }
+      } catch (error) {
+        setError({
+          title: 'Failed to load data',
+          message: error.message,
+          path: null,
+        });
+      }
+
+      setIsLoading(false);
+    },
+    [route]
+  );
+
   return {
     data,
     isLoading,
     error,
+    sendRequest,
   };
 }

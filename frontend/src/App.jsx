@@ -6,6 +6,7 @@ import HeaderLayout from './pages/HeaderLayout';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductItemPage from './pages/ProductItemPage';
+import NewProductPage from './pages/NewProductPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
           {
             path: ':id',
             element: <ProductItemPage />,
+          },
+          {
+            path: 'new',
+            element: <NewProductPage />,
           },
         ],
       },

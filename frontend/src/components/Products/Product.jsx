@@ -5,18 +5,15 @@ import ErrorBlock from '../../UI/ErrorBlock';
 import classes from './Product.module.css';
 
 import { cartActions } from '../../store/cart';
+import Button from '../../UI/Button';
 
 /* eslint-disable react/prop-types */
 export default function Product({ productId }) {
   const dispatch = useDispatch();
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useHttp(`products/${productId}`, {}, null);
+  const { data, isLoading, error } = useHttp(`products/${productId}`, {}, null);
 
   function addToCartHandler() {
-    dispatch(cartActions.addItem(product));
+    dispatch(cartActions.addItem(data.product));
   }
 
   let content;
@@ -34,27 +31,26 @@ export default function Product({ productId }) {
     );
   }
 
-  if (Object.keys(product).length > 0) {
+  if (Object.keys(data).length > 0) {
     content = (
       <article>
         <section className={classes.uppersection}>
           <img
-            src={`http://localhost:6010/images/${product.image}`}
-            alt={product.name}
+            src={`http://localhost:6010/images/${data.product.image}`}
+            alt={data.product.name}
           />
-          <h3>{product.name}</h3>
+          <h3>{data.product.name}</h3>
         </section>
         <section className={classes.uppersection}>
-          <p>{product.price}</p>
-          <button
+          <p>{data.product.price}</p>
+          <Button
+            title="Add to Cart"
             className="button"
             onClick={addToCartHandler}
-          >
-            Add to Cart
-          </button>
+          />
         </section>
         <section>
-          <p>{product.description}</p>
+          <p>{data.product.description}</p>
         </section>
       </article>
     );

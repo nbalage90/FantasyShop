@@ -4,6 +4,7 @@ using Catalog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Data.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240923134414_SeedData")]
+    partial class SeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,43 +46,43 @@ namespace Catalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("42dad73a-4745-4c24-b423-d0d880d804f7"),
+                            Id = new Guid("618fd955-b75c-41b8-a7c2-82d25865498b"),
                             Name = "Smart Phone",
                             ProductIds = "[\"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\"b786103d-c621-4f5a-b498-23452610f88c\"]"
                         },
                         new
                         {
-                            Id = new Guid("04bb54af-5207-43ec-8541-4d4aecc1b280"),
+                            Id = new Guid("08bee5bb-d58e-4e6d-be7f-617eb463d3a6"),
                             Name = "White Appliances",
                             ProductIds = "[\"4f136e9f-ff8c-4c1f-9a33-d12f689bdab8\",\"6ec1297b-ec0a-4aa1-be25-6726e3b51a27\"]"
                         },
                         new
                         {
-                            Id = new Guid("686ca643-87e1-46e4-82b2-96ae981f95b7"),
+                            Id = new Guid("48cc1eb7-33f5-4a68-91a9-b982f14fa8c7"),
                             Name = "Home Kitchen",
                             ProductIds = "[\"c4bbc4a2-4555-45d8-97cc-2a99b2167bff\"]"
                         },
                         new
                         {
-                            Id = new Guid("ac93c287-e185-472f-8dc0-c99b04b996de"),
+                            Id = new Guid("86e8b44b-337a-48ae-8b84-7ee4bdfa3e29"),
                             Name = "Camera",
                             ProductIds = "[\"93170c85-7795-489c-8e8f-7dcf3b4f4188\"]"
                         },
                         new
                         {
-                            Id = new Guid("e6f42685-5c79-418d-a598-f4330a3da14f"),
+                            Id = new Guid("f81d9997-fcd4-4834-9937-7350f3d0316d"),
                             Name = "Electronics",
                             ProductIds = "[]"
                         },
                         new
                         {
-                            Id = new Guid("eb6bf803-9549-496f-b2e3-629c496a23b6"),
+                            Id = new Guid("4abfe40d-6e05-4265-9ebe-0ed328bb4b75"),
                             Name = "Clothing",
                             ProductIds = "[]"
                         },
                         new
                         {
-                            Id = new Guid("1f325c6d-56a6-4e04-82f6-269e05fb598f"),
+                            Id = new Guid("8d1027b6-e0e5-4c7f-8d8a-054fd72122f0"),
                             Name = "Groceries",
                             ProductIds = "[]"
                         });
@@ -102,33 +105,33 @@ namespace Catalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("e6f42685-5c79-418d-a598-f4330a3da14f"),
-                            ProductId = new Guid("aecc6156-b310-4395-9d9a-6749b698bb00")
+                            CategoryId = new Guid("f81d9997-fcd4-4834-9937-7350f3d0316d"),
+                            ProductId = new Guid("bc6c4ba1-62e0-44be-8cca-e4ee81318f69")
                         },
                         new
                         {
-                            CategoryId = new Guid("e6f42685-5c79-418d-a598-f4330a3da14f"),
-                            ProductId = new Guid("8eaf13b5-8572-429e-9f97-de35fd571460")
+                            CategoryId = new Guid("f81d9997-fcd4-4834-9937-7350f3d0316d"),
+                            ProductId = new Guid("b9d539c4-7977-45eb-b5b4-5f0d554290b7")
                         },
                         new
                         {
-                            CategoryId = new Guid("eb6bf803-9549-496f-b2e3-629c496a23b6"),
-                            ProductId = new Guid("cf1012d6-7b07-4e11-9d66-204b3bc50176")
+                            CategoryId = new Guid("4abfe40d-6e05-4265-9ebe-0ed328bb4b75"),
+                            ProductId = new Guid("e269c007-202f-4a0f-94a0-efdb3e7878f6")
                         },
                         new
                         {
-                            CategoryId = new Guid("eb6bf803-9549-496f-b2e3-629c496a23b6"),
-                            ProductId = new Guid("bdf3d2c1-5971-4252-8d74-0449971bb156")
+                            CategoryId = new Guid("4abfe40d-6e05-4265-9ebe-0ed328bb4b75"),
+                            ProductId = new Guid("1dfc07f8-cf7a-4942-b1ae-7e4ecaeeeb89")
                         },
                         new
                         {
-                            CategoryId = new Guid("1f325c6d-56a6-4e04-82f6-269e05fb598f"),
-                            ProductId = new Guid("60a52a21-50b3-474c-ae07-bd7dc8a1c7d2")
+                            CategoryId = new Guid("8d1027b6-e0e5-4c7f-8d8a-054fd72122f0"),
+                            ProductId = new Guid("0a03166d-27e9-4b13-ba89-e6ad1fc3b32a")
                         },
                         new
                         {
-                            CategoryId = new Guid("1f325c6d-56a6-4e04-82f6-269e05fb598f"),
-                            ProductId = new Guid("f3a81022-b44d-415f-ab8f-4519a0072164")
+                            CategoryId = new Guid("8d1027b6-e0e5-4c7f-8d8a-054fd72122f0"),
+                            ProductId = new Guid("b9d02f70-50cf-4246-a3e8-c2bb3f8f4835")
                         });
                 });
 
@@ -163,7 +166,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
-                            CategoryIds = "[\"42dad73a-4745-4c24-b423-d0d880d804f7\"]",
+                            CategoryIds = "[\"618fd955-b75c-41b8-a7c2-82d25865498b\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-1.png",
                             Name = "IPhone X",
@@ -172,7 +175,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
-                            CategoryIds = "[\"42dad73a-4745-4c24-b423-d0d880d804f7\"]",
+                            CategoryIds = "[\"618fd955-b75c-41b8-a7c2-82d25865498b\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-2.png",
                             Name = "Samsung 10",
@@ -181,7 +184,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"),
-                            CategoryIds = "[\"04bb54af-5207-43ec-8541-4d4aecc1b280\"]",
+                            CategoryIds = "[\"08bee5bb-d58e-4e6d-be7f-617eb463d3a6\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-3.png",
                             Name = "Huawei Plus",
@@ -190,7 +193,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27"),
-                            CategoryIds = "[\"04bb54af-5207-43ec-8541-4d4aecc1b280\"]",
+                            CategoryIds = "[\"08bee5bb-d58e-4e6d-be7f-617eb463d3a6\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-4.png",
                             Name = "Xiaomi Mi 9",
@@ -199,7 +202,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("b786103d-c621-4f5a-b498-23452610f88c"),
-                            CategoryIds = "[\"42dad73a-4745-4c24-b423-d0d880d804f7\"]",
+                            CategoryIds = "[\"618fd955-b75c-41b8-a7c2-82d25865498b\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-5.png",
                             Name = "HTC U11+ Plus",
@@ -208,7 +211,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("c4bbc4a2-4555-45d8-97cc-2a99b2167bff"),
-                            CategoryIds = "[\"686ca643-87e1-46e4-82b2-96ae981f95b7\"]",
+                            CategoryIds = "[\"48cc1eb7-33f5-4a68-91a9-b982f14fa8c7\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-6.png",
                             Name = "LG G7 ThinQ",
@@ -217,7 +220,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("93170c85-7795-489c-8e8f-7dcf3b4f4188"),
-                            CategoryIds = "[\"ac93c287-e185-472f-8dc0-c99b04b996de\"]",
+                            CategoryIds = "[\"86e8b44b-337a-48ae-8b84-7ee4bdfa3e29\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-6.png",
                             Name = "Panasonic Lumix",
@@ -225,71 +228,17 @@ namespace Catalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aecc6156-b310-4395-9d9a-6749b698bb00"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
+                            Id = new Guid("bc6c4ba1-62e0-44be-8cca-e4ee81318f69"),
+                            CategoryIds = "[\"f81d9997-fcd4-4834-9937-7350f3d0316d\"]",
                             Description = "Latest model smartphone with great features.",
-                            Image = "product-1.png",
-                            Name = "IPhone X",
-                            Price = 950.00m
+                            Image = "smartphone.jpg",
+                            Name = "Smartphone",
+                            Price = 699.99m
                         },
                         new
                         {
-                            Id = new Guid("71a085c0-8cba-4659-9502-36015d156a45"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-2.png",
-                            Name = "Samsung 10",
-                            Price = 840.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("5578ecd9-6c6c-4426-991c-a7c6ab67a11a"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-3.png",
-                            Name = "Huawei Plus",
-                            Price = 650.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("c66b143d-01cf-41e9-bb12-4def24cce8ff"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-4.png",
-                            Name = "Xiaomi Mi 9",
-                            Price = 470.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("2030fbe9-ab66-4830-885d-4e11a816739f"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-5.png",
-                            Name = "HTC U11+ Plus",
-                            Price = 380.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("d15e3044-20cd-4685-b5f1-53aa77ae07b7"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-6.png",
-                            Name = "LG G7 ThinQ",
-                            Price = 240.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("20eeca62-0d1e-4629-ac70-366cc013dffb"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
-                            Description = "Latest model smartphone with great features.",
-                            Image = "product-6.png",
-                            Name = "Panasonic Lumix",
-                            Price = 240.00m
-                        },
-                        new
-                        {
-                            Id = new Guid("8eaf13b5-8572-429e-9f97-de35fd571460"),
-                            CategoryIds = "[\"e6f42685-5c79-418d-a598-f4330a3da14f\"]",
+                            Id = new Guid("b9d539c4-7977-45eb-b5b4-5f0d554290b7"),
+                            CategoryIds = "[\"f81d9997-fcd4-4834-9937-7350f3d0316d\"]",
                             Description = "High performance laptop for gaming and work.",
                             Image = "laptop.jpg",
                             Name = "Laptop",
@@ -297,8 +246,8 @@ namespace Catalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cf1012d6-7b07-4e11-9d66-204b3bc50176"),
-                            CategoryIds = "[\"eb6bf803-9549-496f-b2e3-629c496a23b6\"]",
+                            Id = new Guid("e269c007-202f-4a0f-94a0-efdb3e7878f6"),
+                            CategoryIds = "[\"4abfe40d-6e05-4265-9ebe-0ed328bb4b75\"]",
                             Description = "Cotton t-shirt available in multiple colors.",
                             Image = "tshirt.jpg",
                             Name = "T-Shirt",
@@ -306,8 +255,8 @@ namespace Catalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bdf3d2c1-5971-4252-8d74-0449971bb156"),
-                            CategoryIds = "[\"eb6bf803-9549-496f-b2e3-629c496a23b6\"]",
+                            Id = new Guid("1dfc07f8-cf7a-4942-b1ae-7e4ecaeeeb89"),
+                            CategoryIds = "[\"4abfe40d-6e05-4265-9ebe-0ed328bb4b75\"]",
                             Description = "Denim jeans that fit perfectly.",
                             Image = "jeans.jpg",
                             Name = "Jeans",
@@ -315,8 +264,8 @@ namespace Catalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("60a52a21-50b3-474c-ae07-bd7dc8a1c7d2"),
-                            CategoryIds = "[\"1f325c6d-56a6-4e04-82f6-269e05fb598f\"]",
+                            Id = new Guid("0a03166d-27e9-4b13-ba89-e6ad1fc3b32a"),
+                            CategoryIds = "[\"8d1027b6-e0e5-4c7f-8d8a-054fd72122f0\"]",
                             Description = "Fresh red apples.",
                             Image = "apple.jpg",
                             Name = "Apple",
@@ -324,8 +273,8 @@ namespace Catalog.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f3a81022-b44d-415f-ab8f-4519a0072164"),
-                            CategoryIds = "[\"1f325c6d-56a6-4e04-82f6-269e05fb598f\"]",
+                            Id = new Guid("b9d02f70-50cf-4246-a3e8-c2bb3f8f4835"),
+                            CategoryIds = "[\"8d1027b6-e0e5-4c7f-8d8a-054fd72122f0\"]",
                             Description = "Whole grain bread.",
                             Image = "bread.jpg",
                             Name = "Bread",

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Data.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20240910144124_Initial")]
+    [Migration("20240918133954_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -46,28 +46,43 @@ namespace Catalog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2ecfc1fa-f6e6-4109-9afd-369d688eab2c"),
+                            Id = new Guid("56efbf6a-5501-4372-a646-55d7f9e257a9"),
                             Name = "Smart Phone",
                             ProductIds = "[\"5334c996-8457-4cf0-815c-ed2b77c4ff61\",\"c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914\",\"b786103d-c621-4f5a-b498-23452610f88c\"]"
                         },
                         new
                         {
-                            Id = new Guid("91bd64b0-e908-4116-af04-67ef646e3dd2"),
+                            Id = new Guid("bb038599-cb6b-4d3c-96ed-442d655671a7"),
                             Name = "White Appliances",
                             ProductIds = "[\"4f136e9f-ff8c-4c1f-9a33-d12f689bdab8\",\"6ec1297b-ec0a-4aa1-be25-6726e3b51a27\"]"
                         },
                         new
                         {
-                            Id = new Guid("3152d35d-2053-4fed-9537-e579a81b3edc"),
+                            Id = new Guid("80d73b9b-4597-4eab-8fe1-831ce1516b44"),
                             Name = "Home Kitchen",
                             ProductIds = "[\"c4bbc4a2-4555-45d8-97cc-2a99b2167bff\"]"
                         },
                         new
                         {
-                            Id = new Guid("aad89c78-ae56-4692-aaf0-0dc0c3d3ed22"),
+                            Id = new Guid("c893511c-5c55-4f84-8ff4-5b2abf8912cb"),
                             Name = "Camera",
                             ProductIds = "[\"93170c85-7795-489c-8e8f-7dcf3b4f4188\"]"
                         });
+                });
+
+            modelBuilder.Entity("Catalog.Domain.CategoryProduct", b =>
+                {
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CategoryId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CategoryProducts");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Product", b =>
@@ -101,7 +116,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("5334c996-8457-4cf0-815c-ed2b77c4ff61"),
-                            CategoryIds = "[\"2ecfc1fa-f6e6-4109-9afd-369d688eab2c\"]",
+                            CategoryIds = "[\"56efbf6a-5501-4372-a646-55d7f9e257a9\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-1.png",
                             Name = "IPhone X",
@@ -110,7 +125,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("c67d6323-e8b1-4bdf-9a75-b0d0d2e7e914"),
-                            CategoryIds = "[\"2ecfc1fa-f6e6-4109-9afd-369d688eab2c\"]",
+                            CategoryIds = "[\"56efbf6a-5501-4372-a646-55d7f9e257a9\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-2.png",
                             Name = "Samsung 10",
@@ -119,7 +134,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("4f136e9f-ff8c-4c1f-9a33-d12f689bdab8"),
-                            CategoryIds = "[\"91bd64b0-e908-4116-af04-67ef646e3dd2\"]",
+                            CategoryIds = "[\"bb038599-cb6b-4d3c-96ed-442d655671a7\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-3.png",
                             Name = "Huawei Plus",
@@ -128,7 +143,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("6ec1297b-ec0a-4aa1-be25-6726e3b51a27"),
-                            CategoryIds = "[\"91bd64b0-e908-4116-af04-67ef646e3dd2\"]",
+                            CategoryIds = "[\"bb038599-cb6b-4d3c-96ed-442d655671a7\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-4.png",
                             Name = "Xiaomi Mi 9",
@@ -137,7 +152,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("b786103d-c621-4f5a-b498-23452610f88c"),
-                            CategoryIds = "[\"2ecfc1fa-f6e6-4109-9afd-369d688eab2c\"]",
+                            CategoryIds = "[\"56efbf6a-5501-4372-a646-55d7f9e257a9\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-5.png",
                             Name = "HTC U11+ Plus",
@@ -146,7 +161,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("c4bbc4a2-4555-45d8-97cc-2a99b2167bff"),
-                            CategoryIds = "[\"3152d35d-2053-4fed-9537-e579a81b3edc\"]",
+                            CategoryIds = "[\"80d73b9b-4597-4eab-8fe1-831ce1516b44\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-6.png",
                             Name = "LG G7 ThinQ",
@@ -155,7 +170,7 @@ namespace Catalog.Data.Migrations
                         new
                         {
                             Id = new Guid("93170c85-7795-489c-8e8f-7dcf3b4f4188"),
-                            CategoryIds = "[\"aad89c78-ae56-4692-aaf0-0dc0c3d3ed22\"]",
+                            CategoryIds = "[\"c893511c-5c55-4f84-8ff4-5b2abf8912cb\"]",
                             Description = "This phone is the company's biggest change to its flagship smartphone in years. It includes a borderless.",
                             Image = "product-6.png",
                             Name = "Panasonic Lumix",
@@ -163,32 +178,17 @@ namespace Catalog.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.Property<Guid>("CategoriesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CategoriesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("CategoryProduct", (string)null);
-                });
-
-            modelBuilder.Entity("CategoryProduct", b =>
+            modelBuilder.Entity("Catalog.Domain.CategoryProduct", b =>
                 {
                     b.HasOne("Catalog.Domain.Category", null)
                         .WithMany()
-                        .HasForeignKey("CategoriesId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Catalog.Domain.Product", null)
                         .WithMany()
-                        .HasForeignKey("ProductsId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

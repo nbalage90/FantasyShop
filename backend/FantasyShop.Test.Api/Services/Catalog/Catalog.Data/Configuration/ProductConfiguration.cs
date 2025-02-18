@@ -1,5 +1,4 @@
-﻿using Catalog.Data.Seed;
-using Catalog.Domain;
+﻿using Catalog.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,11 +7,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> builder)
     {
-        // TODO: load navigation properties
-
-        builder.HasData(SeedingData.SeedingProducts);
-
-        //builder.HasMany(p => p.Categories)
-        //    .WithMany(c => c.Products);
+        builder.HasMany(p => p.Categories)
+            .WithMany(c => c.Products)
+            .UsingEntity<CategoryProduct>(
+                l => l.HasOne<Category>().WithMany().HasForeignKey(e => e.CategoryId),
+                r => r.HasOne<Product>().WithMany().HasForeignKey(e => e.ProductId));
     }
 }
